@@ -75,7 +75,7 @@ const CourseMap = ({ onSelectLevel, completedLevels = [] }) => {
                                     {level.title}
                                 </h3>
                                 <p className="text-xs font-medium text-slate-400 uppercase tracking-wide">
-                                    {locked ? "Locked" : `Word Count: ${level.words.length}`}
+                                    {locked ? "Locked" : `Questions: ${level.questions ? level.questions.length : 0}`}
                                 </p>
                             </div>
 
