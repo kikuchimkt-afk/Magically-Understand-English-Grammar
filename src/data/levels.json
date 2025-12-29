@@ -38,6 +38,8 @@
             "noun",
             "verb",
             "adj"
-        ]
+        ],
+        "hint": "Start with the action of 'Loving'. Colors can act as descriptions.",
+        "explanation": "This sentence uses a Gerund phrase ('Loving him') as the subject. 'Is' links the subject to the adjective 'red'."
     }
 ]

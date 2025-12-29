@@ -48,6 +48,8 @@ const LearningInterface = () => {
     const [availableWords, setAvailableWords] = useState([]);
     const [placedWords, setPlacedWords] = useState([]);
     const [status, setStatus] = useState('playing'); // playing, success, error
+    const [showHint, setShowHint] = useState(false);
+    const [showExplanation, setShowExplanation] = useState(false);
 
     const currentLevel = levels[currentLevelIndex];
 
@@ -57,8 +59,10 @@ const LearningInterface = () => {
             setAvailableWords([...currentLevel.words].sort(() => Math.random() - 0.5)); // Shuffle
             setPlacedWords([]);
             setStatus('playing');
+            setShowHint(false);
+            setShowExplanation(false);
         }
-    }, [currentLevelIndex]);
+    }, [currentLevelIndex, currentLevel]);
 
     const handleWordSelect = (word) => {
         if (status === 'success') return;
@@ -75,37 +79,25 @@ const LearningInterface = () => {
     };
 
     const checkAnswer = () => {
-        const currentPattern = placedWords.map(w => w.type);
-        const targetPattern = currentLevel.targetPattern;
-
-        // Simple Deep Equal Check
-        const isCorrect = currentPattern.length === targetPattern.length &&
-            currentPattern.every((value, index) => value === targetPattern[index]);
-
-        // Also check exact words if needed, but "Grammar Gravity" implies checking structure mainly.
-        // Let's enforce specific words for this prototype as well to catch "Red is loving him" vs "Loving him is red".
-        // Actually, the LEVEL data has a specific order implied by array index in original? 
-        // No, original json just has "words" and "targetPattern". 
-        // For the sentence "Loving him is red", strict word order is usually required.
-        // Let's assume the json words array is in correct order or I should check against the original index?
-        // Wait, "targetPattern" just says types. 
-        // Let's strictly check if the constructed sentence matches the original text order?
-        // Actually, let's assume valid English is the goal. But detecting ALL valid English is hard.
-        // Let's just check against one correct solution for now.
-        // The level data provided earlier:
-        /**
-         "words": [ {text: "Loving"}, {text: "him"}, {text: "is"}, {text: "red"} ]
-         */
-        // If the user builds "Loving him is red", it's correct.
-        // I will check if the word IDs are in the order w1, w2, w3, w4.
-
         const isExactMatch = placedWords.every((w, i) => w.id === `w${i + 1}`);
 
-        if (isExactMatch) {
+        if (isExactMatch && placedWords.length === currentLevel.words.length) {
             setStatus('success');
+            setShowExplanation(true);
         } else {
             setStatus('error');
         }
+    };
+
+    const handleGiveUp = () => {
+        // Auto-complete the sentence
+        const correctOrder = [...currentLevel.words].sort((a, b) =>
+            parseInt(a.id.replace('w', '')) - parseInt(b.id.replace('w', ''))
+        );
+        setPlacedWords(correctOrder);
+        setAvailableWords([]);
+        setStatus('success');
+        setShowExplanation(true);
     };
 
     const nextLevel = () => {
@@ -145,13 +137,21 @@ const LearningInterface = () => {
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-100 rounded-full blur-3xl -z-10 opacity-50 -translate-x-1/2 translate-y-1/2"></div>
 
                 {/* Source/Instruction */}
-                <div className="text-center mb-12">
+                <div className="text-center mb-8">
                     <h2 className="text-sm font-bold text-indigo-500 uppercase tracking-widest mb-2">Reconstruct the Sentence</h2>
                     <p className="text-slate-400 font-medium italic">"{currentLevel.source}"</p>
                 </div>
 
+                {/* Hint Section */}
+                {showHint && (
+                    <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-xl text-yellow-700 text-sm font-medium flex items-start gap-2 animate-fadeIn">
+                        <span className="text-xl">💡</span>
+                        <p>{currentLevel.hint}</p>
+                    </div>
+                )}
+
                 {/* Construction Area */}
-                <div className="min-h-[120px] mb-12 flex flex-wrap justify-center gap-4 items-center bg-slate-50/50 rounded-2xl p-6 border border-slate-100 transition-all duration-300">
+                <div className="min-h-[120px] mb-8 flex flex-wrap justify-center gap-4 items-center bg-slate-50/50 rounded-2xl p-6 border border-slate-100 transition-all duration-300">
                     {placedWords.length === 0 && (
                         <div className="text-slate-300 font-medium text-lg animate-pulse select-none">
                             Tap words below to build the sentence...
@@ -163,6 +163,7 @@ const LearningInterface = () => {
                             key={`placed-${word.id}`}
                             word={word}
                             onClick={() => handleRemoveWord(word)}
+                            disabled={status === 'success'}
                         />
                     ))}
 
@@ -173,7 +174,7 @@ const LearningInterface = () => {
                 </div>
 
                 {/* Word Bank */}
-                <div className="mb-12">
+                <div className="mb-8 min-h-[60px]">
                     <div className="flex flex-wrap justify-center gap-4">
                         {availableWords.map((word) => (
                             <WordTile
@@ -185,11 +186,39 @@ const LearningInterface = () => {
                     </div>
                 </div>
 
+                {/* Explanation Section */}
+                {showExplanation && (
+                    <div className="mb-8 p-6 bg-indigo-50 border border-indigo-100 rounded-2xl animate-fadeIn">
+                        <h3 className="text-indigo-900 font-bold mb-2 flex items-center gap-2">
+                            <Check className="w-5 h-5 text-green-500" /> Explanation
+                        </h3>
+                        <p className="text-indigo-800 leading-relaxed">{currentLevel.explanation}</p>
+                    </div>
+                )}
+
                 {/* Action Bar */}
-                <div className="flex justify-center items-center gap-4 h-16">
-                    {status === 'error' && (
-                        <div className="flex items-center gap-2 text-red-500 font-bold animate-shake">
-                            <span>Try Again!</span>
+                <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+                    {/* Secondary Actions */}
+                    {status !== 'success' && (
+                        <div className="flex gap-2">
+                            <button
+                                onClick={() => setShowHint(!showHint)}
+                                className="px-4 py-2 text-slate-500 font-semibold hover:text-indigo-600 hover:bg-slate-50 rounded-lg transition-colors text-sm"
+                            >
+                                {showHint ? "Hide Hint" : "Show Hint"}
+                            </button>
+                            <button
+                                onClick={handleGiveUp}
+                                className="px-4 py-2 text-slate-400 font-semibold hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors text-sm"
+                            >
+                                Give Up & Show Answer
+                            </button>
+                        </div>
+                    )}
+
+                    {status === 'error' && !showExplanation && (
+                        <div className="text-red-500 font-bold animate-shake px-4">
+                            Try Again!
                         </div>
                     )}
 
@@ -206,7 +235,7 @@ const LearningInterface = () => {
                             onClick={checkAnswer}
                             disabled={placedWords.length === 0}
                             className={clsx(
-                                "flex items-center gap-2 px-8 py-3 rounded-full font-bold transition-all",
+                                "flex items-center gap-2 px-8 py-3 rounded-full font-bold transition-all ml-0 md:ml-auto",
                                 placedWords.length > 0
                                     ? "bg-slate-800 text-white shadow-lg hover:bg-slate-700 hover:scale-105"
                                     : "bg-slate-200 text-slate-400 cursor-not-allowed"
