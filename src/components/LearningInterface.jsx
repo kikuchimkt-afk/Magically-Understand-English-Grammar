@@ -44,25 +44,34 @@ const EmptySlot = ({ index, onClick }) => (
 );
 
 const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
-    // We rely on Props for level control now
+    const currentLevel = levels[levelIndex];
+
+    // State
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [availableWords, setAvailableWords] = useState([]);
     const [placedWords, setPlacedWords] = useState([]);
     const [status, setStatus] = useState('playing'); // playing, success, error
     const [showHint, setShowHint] = useState(false);
     const [showExplanation, setShowExplanation] = useState(false);
 
-    const currentLevel = levels[levelIndex];
+    // Derived
+    const currentQuestion = currentLevel.questions ? currentLevel.questions[currentQuestionIndex] : null;
 
     useEffect(() => {
-        // Initialize level
-        if (currentLevel) {
-            setAvailableWords([...currentLevel.words].sort(() => Math.random() - 0.5)); // Shuffle
+        // Reset question index when level changes
+        setCurrentQuestionIndex(0);
+    }, [levelIndex]);
+
+    useEffect(() => {
+        // Initialize question
+        if (currentQuestion) {
+            setAvailableWords([...currentQuestion.words].sort(() => Math.random() - 0.5)); // Shuffle
             setPlacedWords([]);
             setStatus('playing');
             setShowHint(false);
             setShowExplanation(false);
         }
-    }, [levelIndex, currentLevel]);
+    }, [currentQuestionIndex, currentLevel]);
 
     const handleWordSelect = (word) => {
         if (status === 'success') return;
@@ -81,7 +90,7 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
     const checkAnswer = () => {
         const isExactMatch = placedWords.every((w, i) => w.id === `w${i + 1}`);
 
-        if (isExactMatch && placedWords.length === currentLevel.words.length) {
+        if (isExactMatch && placedWords.length === currentQuestion.words.length) {
             setStatus('success');
             setShowExplanation(true);
         } else {
@@ -91,7 +100,7 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
 
     const handleGiveUp = () => {
         // Auto-complete the sentence
-        const correctOrder = [...currentLevel.words].sort((a, b) =>
+        const correctOrder = [...currentQuestion.words].sort((a, b) =>
             parseInt(a.id.replace('w', '')) - parseInt(b.id.replace('w', ''))
         );
         setPlacedWords(correctOrder);
@@ -99,6 +108,18 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
         setStatus('success');
         setShowExplanation(true);
     };
+
+    const handleNext = () => {
+        if (currentQuestionIndex < currentLevel.questions.length - 1) {
+            // Go to next question
+            setCurrentQuestionIndex(prev => prev + 1);
+        } else {
+            // Level Completed
+            onNextLevel();
+        }
+    };
+
+    if (!currentQuestion) return <div>Loading...</div>;
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-sky-50 flex flex-col items-center justify-center p-6 font-inter">
@@ -113,8 +134,27 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
                 </button>
 
                 <div className="text-right">
-                    <p className="text-slate-400 text-xs font-bold uppercase tracking-wider">Current Challenge</p>
-                    <h1 className="text-xl font-black text-slate-800 tracking-tight">{currentLevel.title}</h1>
+                    <p className="text-slate-400 text-xs font-bold uppercase tracking-wider">
+                        {currentLevel.title}
+                    </p>
+                    <div className="flex items-center justify-end gap-2 mt-1">
+                        <span className="text-xs text-indigo-500 font-bold">
+                            Question {currentQuestionIndex + 1} / {currentLevel.questions.length}
+                        </span>
+                        {/* Progress Dots */}
+                        <div className="flex gap-1">
+                            {currentLevel.questions.map((_, idx) => (
+                                <div
+                                    key={idx}
+                                    className={clsx(
+                                        "w-2 h-2 rounded-full transition-colors",
+                                        idx < currentQuestionIndex ? "bg-indigo-500" :
+                                            idx === currentQuestionIndex ? "bg-indigo-300 animate-pulse" : "bg-slate-200"
+                                    )}
+                                />
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -127,14 +167,14 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
                 {/* Source/Instruction */}
                 <div className="text-center mb-8">
                     <h2 className="text-sm font-bold text-indigo-500 uppercase tracking-widest mb-2">Reconstruct the Sentence</h2>
-                    <p className="text-slate-400 font-medium italic">"{currentLevel.source}"</p>
+                    <p className="text-slate-400 font-medium italic">"{currentQuestion.source}"</p>
                 </div>
 
                 {/* Hint Section */}
                 {showHint && (
                     <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-xl text-yellow-700 text-sm font-medium flex items-start gap-2 animate-fadeIn">
                         <span className="text-xl">💡</span>
-                        <p>{currentLevel.hint}</p>
+                        <p>{currentQuestion.hint}</p>
                     </div>
                 )}
 
@@ -156,7 +196,7 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
                     ))}
 
                     {/* Ghost Slot */}
-                    {status === 'playing' && placedWords.length < currentLevel.words.length && (
+                    {status === 'playing' && placedWords.length < currentQuestion.words.length && (
                         <div className="w-4 h-4 rounded-full bg-slate-200 animate-bounce delay-100 opacity-50" />
                     )}
                 </div>
@@ -184,10 +224,10 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
                         {/* Solution Display */}
                         <div className="bg-white p-4 rounded-xl border border-indigo-100 shadow-sm mb-4">
                             <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Correct Sentence</p>
-                            <p className="text-2xl font-black text-indigo-600">{currentLevel.solutionText}</p>
+                            <p className="text-2xl font-black text-indigo-600">{currentQuestion.solutionText}</p>
                         </div>
 
-                        <p className="text-indigo-800 leading-relaxed text-sm md:text-base">{currentLevel.explanation}</p>
+                        <p className="text-indigo-800 leading-relaxed text-sm md:text-base">{currentQuestion.explanation}</p>
                     </div>
                 )}
 
@@ -219,11 +259,12 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
 
                     {status === 'success' ? (
                         <button
-                            onClick={onNextLevel}
+                            onClick={handleNext}
                             className="flex items-center gap-2 bg-indigo-600 text-white px-8 py-3 rounded-full font-bold shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:scale-105 transition-all"
                         >
                             <span>
-                                {levelIndex < levels.length - 1 ? "Next Level" : "Finish Course"}
+                                {currentQuestionIndex < currentLevel.questions.length - 1 ? "Next Question" :
+                                    (levelIndex < levels.length - 1 ? "Complete Level" : "Finish Course")}
                             </span>
                             <ArrowRight className="w-5 h-5" />
                         </button>
@@ -245,7 +286,7 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
                 </div>
             </div>
 
-            {/* Legend */}
+            {/* Legend (Bottom) */}
             <div className="mt-8 flex gap-6 text-xs font-semibold uppercase tracking-wider text-slate-400">
                 <div className="flex items-center gap-2">
                     <span className="w-3 h-3 rounded-full bg-blue-500"></span> Noun

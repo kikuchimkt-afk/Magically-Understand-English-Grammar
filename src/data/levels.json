@@ -2,181 +2,908 @@
     {
         "id": 1,
         "title": "Level 1: 基本的な文 (Basic Sentence)",
-        "source": "Taylor Swift - Red",
-        "words": [
+        "description": "主語＋動詞、または主語＋動詞＋形容詞の形に慣れましょう。",
+        "questions": [
             {
-                "id": "w1",
-                "text": "Loving",
-                "type": "verb"
+                "id": "l1q1",
+                "source": "Taylor Swift - Red",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "Loving",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "him",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "is",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "red",
+                        "type": "adj"
+                    }
+                ],
+                "targetPattern": [
+                    "verb",
+                    "noun",
+                    "verb",
+                    "adj"
+                ],
+                "solutionText": "Loving him is red",
+                "hint": "「彼を愛することは…」から始めてみましょう。",
+                "explanation": "動名詞句(Loving him)が主語、isが動詞のSVC文型です。"
             },
             {
-                "id": "w2",
-                "text": "him",
-                "type": "noun"
+                "id": "l1q2",
+                "source": "Proverb",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "Love",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "is",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "blind",
+                        "type": "adj"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "adj"
+                ],
+                "solutionText": "Love is blind",
+                "hint": "「愛は盲目」ということわざです。",
+                "explanation": "Love(S) is(V) blind(C) の典型的な第2文型です。"
             },
             {
-                "id": "w3",
-                "text": "is",
-                "type": "verb"
-            },
-            {
-                "id": "w4",
-                "text": "red",
-                "type": "adj"
+                "id": "l1q3",
+                "source": "Proverb",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "Silence",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "is",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "golden",
+                        "type": "adj"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "adj"
+                ],
+                "solutionText": "Silence is golden",
+                "hint": "「沈黙は金」。静けさは貴重です。",
+                "explanation": "Silence(S) is(V) golden(C) の形です。"
             }
-        ],
-        "targetPattern": [
-            "verb",
-            "noun",
-            "verb",
-            "adj"
-        ],
-        "solutionText": "Loving him is red",
-        "hint": "「彼を愛することは…」から始めてみましょう。色は説明として機能します。",
-        "explanation": "この文は動名詞句 ('Loving him') を主語として使っています。be動詞 ('is') は主語と形容詞 ('red') をつなぐ役割（SVC文型）を果たしています。「彼を愛することは（情熱の）赤色だ」という比喩的な表現です。"
+        ]
     },
     {
         "id": 2,
         "title": "Level 2: 動作と対象 (Action & Object)",
-        "source": "Taylor Swift - Shake It Off",
-        "words": [
+        "description": "「誰が」「何を」「どうする」というSVOの形です。",
+        "questions": [
             {
-                "id": "w1",
-                "text": "I",
-                "type": "noun"
+                "id": "l2q1",
+                "source": "Taylor Swift - Shake It Off",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "I",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "shake",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "it",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "off",
+                        "type": "adj"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "noun",
+                    "adj"
+                ],
+                "solutionText": "I shake it off",
+                "hint": "「それを振り払う」。",
+                "explanation": "I(S) shake(V) it(O) off(M) の形です。"
             },
             {
-                "id": "w2",
-                "text": "shake",
-                "type": "verb"
-            },
-            {
-                "id": "w3",
-                "text": "it",
-                "type": "noun"
-            },
-            {
-                "id": "w4",
-                "text": "off",
-                "type": "adj"
+                "id": "l2q2",
+                "source": "Coldplay - Fix You",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "Lights",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "will",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "guide",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "you",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w5",
+                        "text": "home",
+                        "type": "default"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "verb",
+                    "noun",
+                    "default"
+                ],
+                "solutionText": "Lights will guide you home",
+                "hint": "光があなたを家へ導くでしょう。",
+                "explanation": "Lights(S) will guide(V) you(O) home(Adv) のSVO文型に方向を表す副詞がついています。"
             }
-        ],
-        "targetPattern": [
-            "noun",
-            "verb",
-            "noun",
-            "adj"
-        ],
-        "solutionText": "I shake it off",
-        "hint": "誰が、何を、どうする（振り払う）のでしょうか？ 'off' は副詞的ですがここでは動作の結果/状態を表す感覚で配置してみましょう。",
-        "explanation": "基本動詞の 'shake'（振る）に 'off'（離れて）が組み合わさることで「振り払う」「気にしない」という意味になります。主語(S) + 動詞(V) + 目的語(O) のリズムを感じましょう。"
+        ]
     },
     {
         "id": 3,
-        "title": "Level 3: 与える表現 (Giving)",
-        "source": "Proverb",
-        "words": [
+        "title": "Level 3: 与える表現 (Giving - SVOO)",
+        "description": "「誰に」「何を」与えるのか、順番が大事です。",
+        "questions": [
             {
-                "id": "w1",
-                "text": "Life",
-                "type": "noun"
+                "id": "l3q1",
+                "source": "Proverb",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "Life",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "gives",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "you",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "lemons",
+                        "type": "noun"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "noun",
+                    "noun"
+                ],
+                "solutionText": "Life gives you lemons",
+                "hint": "人生はあなたにレモン（試練）を与える。",
+                "explanation": "Life(S) gives(V) you(O1) lemons(O2) の第4文型です。"
             },
             {
-                "id": "w2",
-                "text": "gives",
-                "type": "verb"
-            },
-            {
-                "id": "w3",
-                "text": "you",
-                "type": "noun"
-            },
-            {
-                "id": "w4",
-                "text": "lemons",
-                "type": "noun"
+                "id": "l3q2",
+                "source": "Billy Joel - Piano Man",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "Sing",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "us",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "a",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "song",
+                        "type": "noun"
+                    }
+                ],
+                "targetPattern": [
+                    "verb",
+                    "noun",
+                    "default",
+                    "noun"
+                ],
+                "solutionText": "Sing us a song",
+                "hint": "私たちに歌を一曲歌ってくれ（命令文）。",
+                "explanation": "Sing(V) us(O1) a song(O2)。命令文でのSVOOの形です。"
             }
-        ],
-        "targetPattern": [
-            "noun",
-            "verb",
-            "noun",
-            "noun"
-        ],
-        "solutionText": "Life gives you lemons",
-        "hint": "「人生」が「あなた」に「何」を与えるのでしょうか？",
-        "explanation": "これはSVOO（第4文型）の典型的な例です。「誰に(you)」「何を(lemons)」与えるかという順序が重要です。「人生が酸っぱいレモン（試練）を与える時もある」という意味のことわざです。"
+        ]
     },
     {
         "id": 4,
-        "title": "Level 4: 状態を変える (Make + O + C)",
-        "source": "Gnarls Barkley - Crazy",
-        "words": [
+        "title": "Level 4: 状態を変える (SVOC)",
+        "description": "「AをBにする」という形です。",
+        "questions": [
             {
-                "id": "w1",
-                "text": "You",
-                "type": "noun"
+                "id": "l4q1",
+                "source": "Gnarls Barkley - Crazy",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "You",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "make",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "me",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "crazy",
+                        "type": "adj"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "noun",
+                    "adj"
+                ],
+                "solutionText": "You make me crazy",
+                "hint": "あなたが私を狂わせる。",
+                "explanation": "make(V) me(O) crazy(C) の第5文型です。"
             },
             {
-                "id": "w2",
-                "text": "make",
-                "type": "verb"
-            },
-            {
-                "id": "w3",
-                "text": "me",
-                "type": "noun"
-            },
-            {
-                "id": "w4",
-                "text": "crazy",
-                "type": "adj"
+                "id": "l4q2",
+                "source": "Diana King - Shy Guy",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "You",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "treat",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "me",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "bad",
+                        "type": "adj"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "noun",
+                    "adj"
+                ],
+                "solutionText": "You treat me bad",
+                "hint": "あなたは私をひどく扱う。",
+                "explanation": "ここでは形容詞badが副詞的に使われていますが、構造的にはOの状態説明に近い形です。"
             }
-        ],
-        "targetPattern": [
-            "noun",
-            "verb",
-            "noun",
-            "adj"
-        ],
-        "solutionText": "You make me crazy",
-        "hint": "「あなた」が「私」をどのような状態にするのでしょうか？",
-        "explanation": "SVOC（第5文型）です。Make A B で「AをB（の状態）にする」という意味になります。目的語と補語（形容詞）の関係に注目してください。"
+        ]
     },
     {
         "id": 5,
         "title": "Level 5: 完了形 (Perfect Tense)",
-        "source": "U2 - I Still Haven't Found...",
-        "words": [
+        "description": "have/has + 過去分詞の形です。",
+        "questions": [
             {
-                "id": "w1",
-                "text": "I",
-                "type": "noun"
-            },
-            {
-                "id": "w2",
-                "text": "have",
-                "type": "verb"
-            },
-            {
-                "id": "w3",
-                "text": "found",
-                "type": "verb"
-            },
-            {
-                "id": "w4",
-                "text": "it",
-                "type": "noun"
+                "id": "l5q1",
+                "source": "U2 - I Still Haven't Found...",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "I",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "have",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "found",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "it",
+                        "type": "noun"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "verb",
+                    "noun"
+                ],
+                "solutionText": "I have found it",
+                "hint": "私はそれを見つけた。",
+                "explanation": "have found が動詞の塊です。"
             }
-        ],
-        "targetPattern": [
-            "noun",
-            "verb",
-            "verb",
-            "noun"
-        ],
-        "solutionText": "I have found it",
-        "hint": "「私はそれを見つけた」を完了形で表現します。持っている(have)のは、見つけたという事実(found)です。",
-        "explanation": "have + 過去分詞(p.p.) で現在完了形を作ります。「見つけ終わった状態を今持っている」＝「見つけてしまった／見つけたことがある」というニュアンスになります。"
+        ]
+    },
+    {
+        "id": 6,
+        "title": "Level 6: 進行形 (Progressive)",
+        "description": "be動詞 + -ing で「〜している最中」を表します。",
+        "questions": [
+            {
+                "id": "l6q1",
+                "source": "Gene Kelly - Singin' in the Rain",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "I",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "am",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "singing",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "in",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w5",
+                        "text": "the",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w6",
+                        "text": "rain",
+                        "type": "noun"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "verb",
+                    "default",
+                    "default",
+                    "noun"
+                ],
+                "solutionText": "I am singing in the rain",
+                "hint": "私は雨の中で歌っています。",
+                "explanation": "am singing が進行形を作っています。"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "title": "Level 7: 受動態 (Passive Voice)",
+        "description": "be動詞 + 過去分詞 で「〜される」を表します。",
+        "questions": [
+            {
+                "id": "l7q1",
+                "source": "Maroon 5 - She Will Be Loved",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "She",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "will",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "be",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "loved",
+                        "type": "verb"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "verb",
+                    "verb"
+                ],
+                "solutionText": "She will be loved",
+                "hint": "彼女は愛されるでしょう。",
+                "explanation": "will be loved (助動詞 + be + 過去分詞) です。"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "title": "Level 8: 助動詞 (Auxiliary Verb)",
+        "description": "can, will, must などの助動詞＋動詞の原形。",
+        "questions": [
+            {
+                "id": "l8q1",
+                "source": "The Beatles - We Can Work It Out",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "We",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "can",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "work",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "it",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w5",
+                        "text": "out",
+                        "type": "default"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "verb",
+                    "noun",
+                    "default"
+                ],
+                "solutionText": "We can work it out",
+                "hint": "私たちはそれを何とかできる。",
+                "explanation": "can work (助動詞 + 動詞) です。"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "title": "Level 9: 不定詞の名詞的用法 (To-Infinitive)",
+        "description": "to + 動詞の原形で「〜すること」。",
+        "questions": [
+            {
+                "id": "l9q1",
+                "source": "The Beatles - I Want to Hold Your Hand",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "I",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "want",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "to",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "hold",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w5",
+                        "text": "your",
+                        "type": "adj"
+                    },
+                    {
+                        "id": "w6",
+                        "text": "hand",
+                        "type": "noun"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "default",
+                    "verb",
+                    "adj",
+                    "noun"
+                ],
+                "solutionText": "I want to hold your hand",
+                "hint": "あなたの手を握りたい。",
+                "explanation": "want to hold (握ることを欲する) です。"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "title": "Level 10: 関係代名詞 (Relative Clause)",
+        "description": "名詞を詳しく説明する文をくっつけます。",
+        "questions": [
+            {
+                "id": "l10q1",
+                "source": "David Bowie - The Man Who Sold the World",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "He",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "is",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "the",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "man",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w5",
+                        "text": "who",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w6",
+                        "text": "sold",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w7",
+                        "text": "the",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w8",
+                        "text": "world",
+                        "type": "noun"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "default",
+                    "noun",
+                    "default",
+                    "verb",
+                    "default",
+                    "noun"
+                ],
+                "solutionText": "He is the man who sold the world",
+                "hint": "彼は世界を売った男だ。",
+                "explanation": "the man [who sold the world]。"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "title": "Level 11: 接続詞 (Conjunction)",
+        "description": "文と文をつなぐ言葉です。",
+        "questions": [
+            {
+                "id": "l11q1",
+                "source": "Lyrics - Simple Love",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "I",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "love",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "you",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "because",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w5",
+                        "text": "you",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w6",
+                        "text": "are",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w7",
+                        "text": "you",
+                        "type": "noun"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "noun",
+                    "default",
+                    "noun",
+                    "verb",
+                    "noun"
+                ],
+                "solutionText": "I love you because you are you",
+                "hint": "あなたがあなただから好き。",
+                "explanation": "because が理由をつないでいます。"
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "title": "Level 12: 命令文 (Imperative)",
+        "description": "相手に何かを頼んだり、禁止したりします。",
+        "questions": [
+            {
+                "id": "l12q1",
+                "source": "Journey - Don't Stop Believin'",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "Do",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "not",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "stop",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "believing",
+                        "type": "verb"
+                    }
+                ],
+                "targetPattern": [
+                    "verb",
+                    "default",
+                    "verb",
+                    "verb"
+                ],
+                "solutionText": "Do not stop believing",
+                "hint": "信じることをやめるな。",
+                "explanation": "Do not stop (やめるな) + believing (信じることを)。"
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "title": "Level 13: 存在を表す (There is)",
+        "description": "「〜がある」と言いたいときに使います。",
+        "questions": [
+            {
+                "id": "l13q1",
+                "source": "The Smiths - There Is a Light",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "There",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "is",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "a",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "light",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w5",
+                        "text": "that",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w6",
+                        "text": "never",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w7",
+                        "text": "goes",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w8",
+                        "text": "out",
+                        "type": "default"
+                    }
+                ],
+                "targetPattern": [
+                    "default",
+                    "verb",
+                    "default",
+                    "noun",
+                    "default",
+                    "default",
+                    "verb",
+                    "default"
+                ],
+                "solutionText": "There is a light that never goes out",
+                "hint": "決して消えない光がある。",
+                "explanation": "There is a light (光がある)。"
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "title": "Level 14: 比較級 (Comparative)",
+        "description": "「〜より〜だ」と比べる表現です。",
+        "questions": [
+            {
+                "id": "l14q1",
+                "source": "Britney Spears - Stronger",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "I",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "am",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "stronger",
+                        "type": "adj"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "than",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w5",
+                        "text": "yesterday",
+                        "type": "noun"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "adj",
+                    "default",
+                    "noun"
+                ],
+                "solutionText": "I am stronger than yesterday",
+                "hint": "昨日より強い。",
+                "explanation": "stronger than (〜より強い)。"
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "title": "Level 15: 最上級 (Superlative)",
+        "description": "「一番〜だ」という表現です。",
+        "questions": [
+            {
+                "id": "l15q1",
+                "source": "Tina Turner - The Best",
+                "words": [
+                    {
+                        "id": "w1",
+                        "text": "You",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "w2",
+                        "text": "are",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "w3",
+                        "text": "simply",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w4",
+                        "text": "the",
+                        "type": "default"
+                    },
+                    {
+                        "id": "w5",
+                        "text": "best",
+                        "type": "adj"
+                    }
+                ],
+                "targetPattern": [
+                    "noun",
+                    "verb",
+                    "default",
+                    "default",
+                    "adj"
+                ],
+                "solutionText": "You are simply the best",
+                "hint": "あなたは最高だ。",
+                "explanation": "the best (最高)。"
+            }
+        ]
     }
 ]
