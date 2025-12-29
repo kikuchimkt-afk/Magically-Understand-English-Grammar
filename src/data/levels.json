@@ -29,6 +29,18 @@
                         "type": "adj"
                     }
                 ],
+                "distractors": [
+                    {
+                        "id": "d1",
+                        "text": "are",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "d2",
+                        "text": "Love",
+                        "type": "noun"
+                    }
+                ],
                 "targetPattern": [
                     "verb",
                     "noun",
@@ -59,6 +71,18 @@
                         "type": "adj"
                     }
                 ],
+                "distractors": [
+                    {
+                        "id": "d3",
+                        "text": "are",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "d4",
+                        "text": "Lovingly",
+                        "type": "adv"
+                    }
+                ],
                 "targetPattern": [
                     "noun",
                     "verb",
@@ -86,6 +110,18 @@
                         "id": "w3",
                         "text": "golden",
                         "type": "adj"
+                    }
+                ],
+                "distractors": [
+                    {
+                        "id": "d5",
+                        "text": "Silent",
+                        "type": "adj"
+                    },
+                    {
+                        "id": "d6",
+                        "text": "are",
+                        "type": "verb"
                     }
                 ],
                 "targetPattern": [
@@ -129,6 +165,18 @@
                         "type": "adj"
                     }
                 ],
+                "distractors": [
+                    {
+                        "id": "d1",
+                        "text": "shakes",
+                        "type": "verb"
+                    },
+                    {
+                        "id": "d2",
+                        "text": "me",
+                        "type": "noun"
+                    }
+                ],
                 "targetPattern": [
                     "noun",
                     "verb",
@@ -169,6 +217,18 @@
                         "type": "default"
                     }
                 ],
+                "distractors": [
+                    {
+                        "id": "d3",
+                        "text": "Light",
+                        "type": "noun"
+                    },
+                    {
+                        "id": "d4",
+                        "text": "guides",
+                        "type": "verb"
+                    }
+                ],
                 "targetPattern": [
                     "noun",
                     "verb",
@@ -186,6 +246,7 @@
         "id": 3,
         "title": "Level 3: 与える表現 (Giving - SVOO)",
         "description": "「誰に」「何を」与えるのか、順番が大事です。",
+        "grammarGuide": "【SVOO文型】\n「誰かに、何かを、与える」タイプの動詞（give, send, tellなど）は、目的語を2つ取ります。\n\n順番: 動詞 + [誰に] + [何を]\n\n例: He gave me a present.\n(彼は 私に プレゼントを くれた)\n\nこの順番を間違えないようにしましょう。",
         "questions": [
             {
                 "id": "l3q1",
@@ -263,6 +324,7 @@
         "id": 4,
         "title": "Level 4: 状態を変える (SVOC)",
         "description": "「AをBにする」という形です。",
+        "grammarGuide": "【SVOC文型】\n「OをCの状態にする」という文型です。\nO = C の関係が成り立ちます。\n\n例: You make me happy.\n(あなたは 私を 幸せに する)\n\nmake, keep, find などの動詞でよく使われます。",
         "questions": [
             {
                 "id": "l4q1",

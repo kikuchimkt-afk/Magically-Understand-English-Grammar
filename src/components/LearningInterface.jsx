@@ -50,7 +50,7 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [availableWords, setAvailableWords] = useState([]);
     const [placedWords, setPlacedWords] = useState([]);
-    const [status, setStatus] = useState('playing'); // playing, success, error
+    const [status, setStatus] = useState('intro'); // intro, playing, success, error
     const [showHint, setShowHint] = useState(false);
     const [showExplanation, setShowExplanation] = useState(false);
 
@@ -58,26 +58,34 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
     const currentQuestion = currentLevel.questions ? currentLevel.questions[currentQuestionIndex] : null;
 
     useEffect(() => {
-        // Reset question index when level changes
+        // Reset everything when level changes
         setCurrentQuestionIndex(0);
+        setStatus('intro'); // Start with intro
     }, [levelIndex]);
 
     useEffect(() => {
-        // Initialize question
-        if (currentQuestion) {
-            setAvailableWords([...currentQuestion.words].sort(() => Math.random() - 0.5)); // Shuffle
+        // Initialize question logic
+        if (currentQuestion && status === 'playing') {
+            const allWords = [
+                ...currentQuestion.words,
+                ...(currentQuestion.distractors || [])
+            ];
+            setAvailableWords(allWords.sort(() => Math.random() - 0.5));
             setPlacedWords([]);
-            setStatus('playing');
             setShowHint(false);
             setShowExplanation(false);
         }
-    }, [currentQuestionIndex, currentLevel]);
+    }, [currentQuestionIndex, currentLevel, status]);
+
+    const handleStartPractice = () => {
+        setStatus('playing');
+    };
 
     const handleWordSelect = (word) => {
         if (status === 'success') return;
         setPlacedWords([...placedWords, word]);
         setAvailableWords(availableWords.filter(w => w.id !== word.id));
-        setStatus('playing');
+        setStatus('playing'); // Keep playing status
     };
 
     const handleRemoveWord = (word) => {
@@ -88,9 +96,10 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
     };
 
     const checkAnswer = () => {
-        const isExactMatch = placedWords.every((w, i) => w.id === `w${i + 1}`);
+        const isCorrectLength = placedWords.length === currentQuestion.words.length;
+        const isCorrectOrder = placedWords.every((w, i) => w.id === `w${i + 1}`);
 
-        if (isExactMatch && placedWords.length === currentQuestion.words.length) {
+        if (isCorrectLength && isCorrectOrder) {
             setStatus('success');
             setShowExplanation(true);
         } else {
@@ -99,7 +108,6 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
     };
 
     const handleGiveUp = () => {
-        // Auto-complete the sentence
         const correctOrder = [...currentQuestion.words].sort((a, b) =>
             parseInt(a.id.replace('w', '')) - parseInt(b.id.replace('w', ''))
         );
@@ -111,16 +119,57 @@ const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
 
     const handleNext = () => {
         if (currentQuestionIndex < currentLevel.questions.length - 1) {
-            // Go to next question
             setCurrentQuestionIndex(prev => prev + 1);
+            setStatus('playing'); // Reset to playing for next question
+            // Note: UseEffect will trigger re-shuffle
         } else {
-            // Level Completed
             onNextLevel();
         }
     };
 
+    // --- Render Logic for Intro ---
+    if (status === 'intro') {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-sky-50 flex flex-col items-center justify-center p-6 font-inter">
+                <div className="w-full max-w-2xl bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 p-8 md:p-12 relative overflow-hidden animate-fadeIn">
+                    <button
+                        onClick={onBack}
+                        className="absolute top-6 left-6 text-slate-400 hover:text-indigo-600 transition-colors"
+                    >
+                        <ArrowRight className="w-6 h-6 rotate-180" />
+                    </button>
+
+                    <div className="text-center mb-8">
+                        <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
+                            Grammar Guide
+                        </span>
+                        <h1 className="text-3xl font-black text-slate-800 mt-4 mb-2">{currentLevel.title}</h1>
+                        <p className="text-slate-500 font-medium">{currentLevel.description}</p>
+                    </div>
+
+                    <div className="bg-indigo-50/50 rounded-2xl p-6 md:p-8 mb-8 border border-indigo-100">
+                        <div className="prose prose-indigo prose-lg text-slate-700 whitespace-pre-wrap leading-relaxed">
+                            {currentLevel.grammarGuide || "Let's learn by feeling!"}
+                        </div>
+                    </div>
+
+                    <div className="flex justify-center">
+                        <button
+                            onClick={handleStartPractice}
+                            className="bg-indigo-600 text-white text-lg px-10 py-4 rounded-full font-bold shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:scale-105 transition-all flex items-center gap-2"
+                        >
+                            <span>Start Practice</span>
+                            <ArrowRight className="w-5 h-5" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     if (!currentQuestion) return <div>Loading...</div>;
 
+    // --- Main Playing Render ---
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-sky-50 flex flex-col items-center justify-center p-6 font-inter">
             {/* Header */}
