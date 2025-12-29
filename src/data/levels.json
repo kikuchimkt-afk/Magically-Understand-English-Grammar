@@ -1,0 +1,43 @@
+[
+    {
+        "id": 1,
+        "title": "Basic Sentence",
+        "source": "Taylor Swift - Red",
+        "words": [
+            {
+                "id": "w1",
+                "text": "Loving",
+                "type": "verb",
+                "x": 100,
+                "y": 100
+            },
+            {
+                "id": "w2",
+                "text": "him",
+                "type": "noun",
+                "x": 200,
+                "y": 100
+            },
+            {
+                "id": "w3",
+                "text": "is",
+                "type": "verb",
+                "x": 300,
+                "y": 100
+            },
+            {
+                "id": "w4",
+                "text": "red",
+                "type": "adj",
+                "x": 400,
+                "y": 100
+            }
+        ],
+        "targetPattern": [
+            "verb",
+            "noun",
+            "verb",
+            "adj"
+        ]
+    }
+]
