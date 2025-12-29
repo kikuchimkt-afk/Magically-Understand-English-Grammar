@@ -43,15 +43,15 @@ const EmptySlot = ({ index, onClick }) => (
     </div>
 );
 
-const LearningInterface = () => {
-    const [currentLevelIndex, setCurrentLevelIndex] = useState(0);
+const LearningInterface = ({ levelIndex, onBack, onNextLevel }) => {
+    // We rely on Props for level control now
     const [availableWords, setAvailableWords] = useState([]);
     const [placedWords, setPlacedWords] = useState([]);
     const [status, setStatus] = useState('playing'); // playing, success, error
     const [showHint, setShowHint] = useState(false);
     const [showExplanation, setShowExplanation] = useState(false);
 
-    const currentLevel = levels[currentLevelIndex];
+    const currentLevel = levels[levelIndex];
 
     useEffect(() => {
         // Initialize level
@@ -62,7 +62,7 @@ const LearningInterface = () => {
             setShowHint(false);
             setShowExplanation(false);
         }
-    }, [currentLevelIndex, currentLevel]);
+    }, [levelIndex, currentLevel]);
 
     const handleWordSelect = (word) => {
         if (status === 'success') return;
@@ -100,34 +100,22 @@ const LearningInterface = () => {
         setShowExplanation(true);
     };
 
-    const nextLevel = () => {
-        if (currentLevelIndex < levels.length - 1) {
-            setCurrentLevelIndex(prev => prev + 1);
-        } else {
-            alert("Prototype complete! Good job.");
-            setCurrentLevelIndex(0); // Loop back
-        }
-    };
-
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-sky-50 flex flex-col items-center justify-center p-6 font-inter">
             {/* Header */}
-            <div className="w-full max-w-4xl flex justify-between items-center mb-12">
-                <div className="flex items-center gap-2">
-                    <div className="bg-indigo-600 p-2 rounded-lg">
-                        <Sparkles className="text-white w-6 h-6" />
-                    </div>
-                    <div>
-                        <h1 className="text-2xl font-black text-slate-800 tracking-tight">Grammar Magic</h1>
-                        <p className="text-slate-500 text-sm font-medium">Level {currentLevelIndex + 1}: {currentLevel.title}</p>
-                    </div>
-                </div>
+            <div className="w-full max-w-4xl flex justify-between items-center mb-8 md:mb-12">
                 <button
-                    onClick={() => setCurrentLevelIndex(currentLevelIndex)}
-                    className="p-2 text-slate-400 hover:text-indigo-600 transition-colors"
+                    onClick={onBack}
+                    className="flex items-center gap-2 text-slate-500 hover:text-indigo-600 font-bold transition-colors"
                 >
-                    <RefreshCw className="w-5 h-5" />
+                    <ArrowRight className="w-5 h-5 rotate-180" />
+                    <span>Back to Map</span>
                 </button>
+
+                <div className="text-right">
+                    <p className="text-slate-400 text-xs font-bold uppercase tracking-wider">Current Challenge</p>
+                    <h1 className="text-xl font-black text-slate-800 tracking-tight">{currentLevel.title}</h1>
+                </div>
             </div>
 
             {/* Main Stage */}
@@ -167,7 +155,7 @@ const LearningInterface = () => {
                         />
                     ))}
 
-                    {/* Ghost Slot for next word suggestion or just spacing */}
+                    {/* Ghost Slot */}
                     {status === 'playing' && placedWords.length < currentLevel.words.length && (
                         <div className="w-4 h-4 rounded-full bg-slate-200 animate-bounce delay-100 opacity-50" />
                     )}
@@ -190,9 +178,16 @@ const LearningInterface = () => {
                 {showExplanation && (
                     <div className="mb-8 p-6 bg-indigo-50 border border-indigo-100 rounded-2xl animate-fadeIn">
                         <h3 className="text-indigo-900 font-bold mb-2 flex items-center gap-2">
-                            <Check className="w-5 h-5 text-green-500" /> Explanation
+                            <Check className="w-5 h-5 text-green-500" /> Nice Work!
                         </h3>
-                        <p className="text-indigo-800 leading-relaxed">{currentLevel.explanation}</p>
+
+                        {/* Solution Display */}
+                        <div className="bg-white p-4 rounded-xl border border-indigo-100 shadow-sm mb-4">
+                            <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Correct Sentence</p>
+                            <p className="text-2xl font-black text-indigo-600">{currentLevel.solutionText}</p>
+                        </div>
+
+                        <p className="text-indigo-800 leading-relaxed text-sm md:text-base">{currentLevel.explanation}</p>
                     </div>
                 )}
 
@@ -205,29 +200,31 @@ const LearningInterface = () => {
                                 onClick={() => setShowHint(!showHint)}
                                 className="px-4 py-2 text-slate-500 font-semibold hover:text-indigo-600 hover:bg-slate-50 rounded-lg transition-colors text-sm"
                             >
-                                {showHint ? "Hide Hint" : "Show Hint"}
+                                {showHint ? "ヒントを隠す" : "ヒントを見る"}
                             </button>
                             <button
                                 onClick={handleGiveUp}
                                 className="px-4 py-2 text-slate-400 font-semibold hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors text-sm"
                             >
-                                Give Up & Show Answer
+                                答えを見る
                             </button>
                         </div>
                     )}
 
                     {status === 'error' && !showExplanation && (
                         <div className="text-red-500 font-bold animate-shake px-4">
-                            Try Again!
+                            Incorrect order. Try again!
                         </div>
                     )}
 
                     {status === 'success' ? (
                         <button
-                            onClick={nextLevel}
-                            className="flex items-center gap-2 bg-green-500 text-white px-8 py-3 rounded-full font-bold shadow-lg shadow-green-200 hover:bg-green-600 hover:scale-105 transition-all"
+                            onClick={onNextLevel}
+                            className="flex items-center gap-2 bg-indigo-600 text-white px-8 py-3 rounded-full font-bold shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:scale-105 transition-all"
                         >
-                            <span>Next Level</span>
+                            <span>
+                                {levelIndex < levels.length - 1 ? "Next Level" : "Finish Course"}
+                            </span>
                             <ArrowRight className="w-5 h-5" />
                         </button>
                     ) : (
@@ -248,7 +245,7 @@ const LearningInterface = () => {
                 </div>
             </div>
 
-            {/* Legend (Bottom) */}
+            {/* Legend */}
             <div className="mt-8 flex gap-6 text-xs font-semibold uppercase tracking-wider text-slate-400">
                 <div className="flex items-center gap-2">
                     <span className="w-3 h-3 rounded-full bg-blue-500"></span> Noun

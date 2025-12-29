@@ -1,36 +1,28 @@
 [
     {
         "id": 1,
-        "title": "Basic Sentence",
+        "title": "Level 1: 基本的な文 (Basic Sentence)",
         "source": "Taylor Swift - Red",
         "words": [
             {
                 "id": "w1",
                 "text": "Loving",
-                "type": "verb",
-                "x": 100,
-                "y": 100
+                "type": "verb"
             },
             {
                 "id": "w2",
                 "text": "him",
-                "type": "noun",
-                "x": 200,
-                "y": 100
+                "type": "noun"
             },
             {
                 "id": "w3",
                 "text": "is",
-                "type": "verb",
-                "x": 300,
-                "y": 100
+                "type": "verb"
             },
             {
                 "id": "w4",
                 "text": "red",
-                "type": "adj",
-                "x": 400,
-                "y": 100
+                "type": "adj"
             }
         ],
         "targetPattern": [
@@ -39,7 +31,152 @@
             "verb",
             "adj"
         ],
-        "hint": "Start with the action of 'Loving'. Colors can act as descriptions.",
-        "explanation": "This sentence uses a Gerund phrase ('Loving him') as the subject. 'Is' links the subject to the adjective 'red'."
+        "solutionText": "Loving him is red",
+        "hint": "「彼を愛することは…」から始めてみましょう。色は説明として機能します。",
+        "explanation": "この文は動名詞句 ('Loving him') を主語として使っています。be動詞 ('is') は主語と形容詞 ('red') をつなぐ役割（SVC文型）を果たしています。「彼を愛することは（情熱の）赤色だ」という比喩的な表現です。"
+    },
+    {
+        "id": 2,
+        "title": "Level 2: 動作と対象 (Action & Object)",
+        "source": "Taylor Swift - Shake It Off",
+        "words": [
+            {
+                "id": "w1",
+                "text": "I",
+                "type": "noun"
+            },
+            {
+                "id": "w2",
+                "text": "shake",
+                "type": "verb"
+            },
+            {
+                "id": "w3",
+                "text": "it",
+                "type": "noun"
+            },
+            {
+                "id": "w4",
+                "text": "off",
+                "type": "adj"
+            }
+        ],
+        "targetPattern": [
+            "noun",
+            "verb",
+            "noun",
+            "adj"
+        ],
+        "solutionText": "I shake it off",
+        "hint": "誰が、何を、どうする（振り払う）のでしょうか？ 'off' は副詞的ですがここでは動作の結果/状態を表す感覚で配置してみましょう。",
+        "explanation": "基本動詞の 'shake'（振る）に 'off'（離れて）が組み合わさることで「振り払う」「気にしない」という意味になります。主語(S) + 動詞(V) + 目的語(O) のリズムを感じましょう。"
+    },
+    {
+        "id": 3,
+        "title": "Level 3: 与える表現 (Giving)",
+        "source": "Proverb",
+        "words": [
+            {
+                "id": "w1",
+                "text": "Life",
+                "type": "noun"
+            },
+            {
+                "id": "w2",
+                "text": "gives",
+                "type": "verb"
+            },
+            {
+                "id": "w3",
+                "text": "you",
+                "type": "noun"
+            },
+            {
+                "id": "w4",
+                "text": "lemons",
+                "type": "noun"
+            }
+        ],
+        "targetPattern": [
+            "noun",
+            "verb",
+            "noun",
+            "noun"
+        ],
+        "solutionText": "Life gives you lemons",
+        "hint": "「人生」が「あなた」に「何」を与えるのでしょうか？",
+        "explanation": "これはSVOO（第4文型）の典型的な例です。「誰に(you)」「何を(lemons)」与えるかという順序が重要です。「人生が酸っぱいレモン（試練）を与える時もある」という意味のことわざです。"
+    },
+    {
+        "id": 4,
+        "title": "Level 4: 状態を変える (Make + O + C)",
+        "source": "Gnarls Barkley - Crazy",
+        "words": [
+            {
+                "id": "w1",
+                "text": "You",
+                "type": "noun"
+            },
+            {
+                "id": "w2",
+                "text": "make",
+                "type": "verb"
+            },
+            {
+                "id": "w3",
+                "text": "me",
+                "type": "noun"
+            },
+            {
+                "id": "w4",
+                "text": "crazy",
+                "type": "adj"
+            }
+        ],
+        "targetPattern": [
+            "noun",
+            "verb",
+            "noun",
+            "adj"
+        ],
+        "solutionText": "You make me crazy",
+        "hint": "「あなた」が「私」をどのような状態にするのでしょうか？",
+        "explanation": "SVOC（第5文型）です。Make A B で「AをB（の状態）にする」という意味になります。目的語と補語（形容詞）の関係に注目してください。"
+    },
+    {
+        "id": 5,
+        "title": "Level 5: 完了形 (Perfect Tense)",
+        "source": "U2 - I Still Haven't Found...",
+        "words": [
+            {
+                "id": "w1",
+                "text": "I",
+                "type": "noun"
+            },
+            {
+                "id": "w2",
+                "text": "have",
+                "type": "verb"
+            },
+            {
+                "id": "w3",
+                "text": "found",
+                "type": "verb"
+            },
+            {
+                "id": "w4",
+                "text": "it",
+                "type": "noun"
+            }
+        ],
+        "targetPattern": [
+            "noun",
+            "verb",
+            "verb",
+            "noun"
+        ],
+        "solutionText": "I have found it",
+        "hint": "「私はそれを見つけた」を完了形で表現します。持っている(have)のは、見つけたという事実(found)です。",
+        "explanation": "have + 過去分詞(p.p.) で現在完了形を作ります。「見つけ終わった状態を今持っている」＝「見つけてしまった／見つけたことがある」というニュアンスになります。"
     }
 ]
